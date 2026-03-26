@@ -19,7 +19,7 @@ export default function Navbar() {
       <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight text-lg">
           <Terminal className="w-5 h-5" />
-          <span>Searching for Global Minimum</span>
+          <span>Ravi Teja Gonnabathula</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
