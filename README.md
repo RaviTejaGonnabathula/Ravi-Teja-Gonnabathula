@@ -13,23 +13,24 @@ Welcome to the personal blog and portfolio of **Ravi Teja Gonnabathula**, an AI 
 
 ## How to Add New Blog Posts
 
-Adding a new post is simple. All posts are stored in `/src/data/posts.ts`.
+Adding a new post is simple. Each post lives in its own file inside `/src/data/posts/`.
 
-1. Open `/src/data/posts.ts`.
-2. Add a new object to the `posts` array at the top.
-3. Use the following template:
+1. Create a new `.ts` file in `/src/data/posts/` (e.g., `my-new-article.ts`).
+2. Use the following template:
 
 \`\`\`typescript
-  {
-    id: 'unique-id-here', // e.g., '5'
-    slug: 'my-new-article-url', // This becomes the URL: /#/blog/my-new-article-url
-    title: 'The Title of My Article',
-    excerpt: 'A short 1-2 sentence summary that shows up on the homepage.',
-    date: '2026-04-01', // YYYY-MM-DD format
-    readTime: '6 min read',
-    originalUrl: 'https://substack.com/your-article-link', // Optional: Link to original post
-    originalPlatform: 'Substack', // Optional: Name of original platform
-    content: \`
+import { Post } from '../posts';
+
+export const post: Post = {
+  id: 'unique-id-here', // e.g., '5'
+  slug: 'my-new-article-url', // This becomes the URL: /#/blog/my-new-article-url
+  title: 'The Title of My Article',
+  excerpt: 'A short 1-2 sentence summary that shows up on the homepage.',
+  date: '2026-04-01', // YYYY-MM-DD format
+  readTime: '6 min read',
+  originalUrl: 'https://substack.com/your-article-link', // Optional: Link to original post
+  originalPlatform: 'Substack', // Optional: Name of original platform
+  content: \`
 # My Article Heading
 
 Write your content here using standard Markdown!
@@ -42,7 +43,22 @@ Write your content here using standard Markdown!
 print("Hello World")
 \\\`\\\`\\\`
 \`
-  },
+};
+\`\`\`
+
+3. The app will automatically detect the new file and add it to the blog!
+
+## How to Add Images to Posts
+
+To keep things organized, do not dump all images into one folder. Instead, create a dedicated folder for each post:
+
+1. Go to `/public/images/posts/`.
+2. Create a new folder named after your post's slug (e.g., `/public/images/posts/my-new-article-url/`).
+3. Place your images inside that folder.
+4. Reference them in your Markdown content like this:
+
+\`\`\`markdown
+![My Image Description](/images/posts/my-new-article-url/my-image.png)
 \`\`\`
 
 ## Local Development
