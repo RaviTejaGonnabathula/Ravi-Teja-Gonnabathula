@@ -1,0 +1,34 @@
+{
+  "entities": {
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment left by an anonymous user on a blog post.",
+      "type": "object",
+      "properties": {
+        "postId": {
+          "type": "string",
+          "description": "The slug of the blog post this comment belongs to."
+        },
+        "authorName": {
+          "type": "string",
+          "description": "The name provided by the anonymous commenter."
+        },
+        "content": {
+          "type": "string",
+          "description": "The text content of the comment."
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "description": "The time the comment was created."
+        }
+      },
+      "required": ["postId", "authorName", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" },
+      "description": "Stores all blog comments."
+    }
+  }
+}
