@@ -64,7 +64,7 @@ export default function Home() {
           
           <div className="shrink-0 flex justify-start md:justify-end">
             <img 
-              src="/profile.jpg" 
+              src={`${import.meta.env.BASE_URL}profile.jpg`}
               alt="Ravi Teja Gonnabathula" 
               className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-zinc-100 dark:border-zinc-800 shadow-xl"
               referrerPolicy="no-referrer"
