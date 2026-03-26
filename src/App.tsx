@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './components/ThemeProvider';
 import Layout from './components/Layout';
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
@@ -27,7 +27,7 @@ export default function App() {
               <Route path="about" element={<About />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </ThemeProvider>
     </HelmetProvider>
   );
