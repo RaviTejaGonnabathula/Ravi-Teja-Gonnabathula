@@ -1,5 +1,22 @@
 {
   "entities": {
+    "Subscriber": {
+      "title": "Subscriber",
+      "description": "A user subscribed to the newsletter.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the subscriber."
+        },
+        "subscribedAt": {
+          "type": "timestamp",
+          "description": "The time the subscription was created."
+        }
+      },
+      "required": ["email", "subscribedAt"]
+    },
     "Comment": {
       "title": "Comment",
       "description": "A comment left by an anonymous user on a blog post.",
@@ -26,6 +43,10 @@
     }
   },
   "firestore": {
+    "/subscribers/{subscriberId}": {
+      "schema": { "$ref": "#/entities/Subscriber" },
+      "description": "Stores all newsletter subscribers."
+    },
     "/comments/{commentId}": {
       "schema": { "$ref": "#/entities/Comment" },
       "description": "Stores all blog comments."

@@ -14,6 +14,12 @@ service cloud.firestore {
     //   - content: string (required, max length 1000) - The text of the comment
     //   - createdAt: timestamp (required) - When the comment was posted
     //
+    // Collection: subscribers
+    // Document ID: Auto-generated
+    // Fields:
+    //   - email: string (required, valid email format) - The email address of the subscriber
+    //   - subscribedAt: timestamp (required) - When the subscription was created
+    //
     // ===============================================================
 
     // Helper Functions
@@ -23,6 +29,20 @@ service cloud.firestore {
 
     function hasOnlyAllowedFields(fields) {
       return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidEmail(email) {
+      return email is string &&
+        email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidSubscriber() {
+      let data = request.resource.data;
+      return hasRequiredFields(['email', 'subscribedAt']) &&
+             hasOnlyAllowedFields(['email', 'subscribedAt']) &&
+             isValidEmail(data.email) &&
+             data.subscribedAt is timestamp &&
+             data.subscribedAt == request.time;
     }
 
     function isValidComment() {
@@ -44,6 +64,17 @@ service cloud.firestore {
       allow create: if isValidComment();
       
       // No updates or deletes allowed for anonymous comments
+      allow update, delete: if false;
+    }
+
+    match /subscribers/{subscriberId} {
+      // Nobody can read subscribers from the client (only admin)
+      allow read: if false;
+      
+      // Anyone can subscribe
+      allow create: if isValidSubscriber();
+      
+      // No updates or deletes allowed for subscribers
       allow update, delete: if false;
     }
   }

@@ -3,6 +3,7 @@ import { posts } from '../data/posts';
 import { Helmet } from 'react-helmet-async';
 import { Github, Linkedin } from 'lucide-react';
 import { XIcon, MediumIcon, SubstackIcon } from '../components/Icons';
+import profileImg from '../assets/profile.jpg';
 
 export default function Home() {
   const recentPosts = posts.slice(0, 3);
@@ -64,7 +65,7 @@ export default function Home() {
           
           <div className="shrink-0 flex justify-start md:justify-end">
             <img 
-              src={`${import.meta.env.BASE_URL}profile.jpg`}
+              src={profileImg}
               alt="Ravi Teja Gonnabathula" 
               className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-zinc-100 dark:border-zinc-800 shadow-xl"
               referrerPolicy="no-referrer"
